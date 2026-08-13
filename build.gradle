@@ -1,0 +1,68 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.3.2'
+    id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.research'
+version = '1.0.0'
+description = 'Multi-Agent System with OpenAI MCP Integration'
+
+java {
+    sourceCompatibility = '21'
+    targetCompatibility = '21'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spring Boot Starters
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-logging'
+
+    // LangChain4j for Agent Orchestration
+    implementation 'dev.langchain4j:langchain4j-core:0.32.0'
+    implementation 'dev.langchain4j:langchain4j-open-ai:0.32.0'
+
+    // HTML Parsing for web search
+    implementation 'org.jsoup:jsoup:1.17.2'
+
+    // HTTP Client for MCP
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+
+    // JSON Processing
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.google.code.gson:gson'
+
+    // Lombok for reducing boilerplate
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'junit:junit'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+springBoot {
+    mainClass = 'com.research.summarizer.ResearchSummarizerApplication'
+}
+
+tasks.named('bootJar') {
+    archiveFileName = "${project.name}-${project.version}.jar"
+}
+
+// Compiler configuration for Java 21 with preview features
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs.add('--enable-preview')
+    options.release = 21
+}
+
+tasks.withType(Test).configureEach {
+    jvmArgs '--enable-preview'
+}
