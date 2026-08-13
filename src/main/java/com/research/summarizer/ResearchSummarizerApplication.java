@@ -12,7 +12,7 @@ import org.springframework.context.annotation.ComponentScan;
  * 3. Returns structured summary reports
  */
 @SpringBootApplication
-@ComponentScan(basePackages = { "com.research.summarizer" })
+//@ComponentScan(basePackages = { "com.research.summarizer" })
 public class ResearchSummarizerApplication {
 
   public static void main(String[] args) {
