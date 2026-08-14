@@ -64,10 +64,8 @@ public class MCPService {
     try {
       // Step 1: Initialize handshake
       initialize();
-      
-      // Step 2: Send initialized notification (already done in initialize())
-      
-      // Step 3: Execute search tool
+
+      // Step 2: Execute search tool
       String searchResponse = search(query);
       
       if (searchResponse != null && !searchResponse.isEmpty()) {

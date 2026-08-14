@@ -33,9 +33,9 @@ public class SearchAgent {
    * OpenAI-related keywords for query classification
    */
   private static final String[] OPENAI_KEYWORDS = {
-      "openai", "gpt", "davinci", "api", "chat completion", "embedding",
+      "openai", "gpt", "api", "chat completion", "embedding",
       "fine-tuning", "fine tuning", "agents sdk", "agents", "responses api", "responses",
-      "models", "sdk", "dall-e", "assistants", "function calling", "retrieval", "vision"
+      "models", "sdk", "function calling", "retrieval"
   };
 
   /**
