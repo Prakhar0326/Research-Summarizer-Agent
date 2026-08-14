@@ -365,8 +365,117 @@ The test suite covers:
    ```bash
    curl -X POST http://localhost:8080/api/research/summarize \
      -H "Content-Type: application/json" \
-     -d '{"topic": "Machine learning best practices", "maxSources": 5}'
+     -d '{"topic": "Can you tell me about Virat Kohli", "maxSources": 2}'
    ```
+
+## Sample API Responses
+
+### Response 1: OpenAI Developer Topic (MCP Routing)
+
+**Request:**
+```json
+{
+  "topic": "What is the OpenAI Responses API?",
+  "maxSources": 2
+}
+```
+
+**Response:**
+```json
+{
+  "topic": "What is the OpenAI Responses API?",
+  "searchSource": "MCP",
+  "executiveSummary": "What is the OpenAI Responses API? can be understood through 5 key findings. The Responses API enables seamless multi‑turn interactions in a single API call. It offers easy access to hosted tools such as file search, web search, and code interpreter.",
+  "keyFindings": [
+    "The Responses API enables seamless multi‑turn interactions in a single API call.",
+    "It offers easy access to hosted tools such as file search, web search, and code interpreter.",
+    "It supports multi‑tool orchestration, allowing Retrieval‑Augmented Generation (RAG) with internal and external vector databases.",
+    "The file_search tool connects to an internal vector store and can be extended to external databases like Pinecone.",
+    "The Responses API is an asynchronous, stateful API built for complex, long‑running reasoning."
+  ],
+  "details": "## Key Findings\n\n- The Responses API enables seamless multi‑turn interactions in a single API call.\n- It offers easy access to hosted tools such as file search, web search, and code interpreter.\n- It supports multi‑tool orchestration, allowing Retrieval‑Augmented Generation (RAG) with internal and external vector databases.\n- The file_search tool connects to an internal vector store and can be extended to external databases like Pinecone.\n\n## Statistics\n\nNo statistics found.\n\n## Definitions\n\n- The Responses API is an asynchronous, stateful API built for complex, long‑running reasoning.\n",
+  "sources": [
+    {
+      "title": "responses example#what is the responses api",
+      "url": "https://developers.openai.com/cookbook/examples/responses_api/responses_example#what-is-the-responses-api",
+      "snippet": "The Responses API is a new way to interact with OpenAI models, designed to be simpler and more flexible than previous APIs. It makes it easy to build advanced AI applications that use multiple tools."
+    },
+    {
+      "title": "responses api tool orchestration#multi tool orchestration with rag approach using openais responses api",
+      "url": "https://developers.openai.com/cookbook/examples/responses_api/responses_api_tool_orchestration#multi-tool-orchestration-with-rag-approach-using-openais-responses-api",
+      "snippet": "This cookbook guides you through building dynamic, multi-tool workflows using OpenAI's Responses API. It demonstrates how to implement a Retrieval-Augmented Generation (RAG) approach that intelligently..."
+    }
+  ]
+}
+```
+
+**Key Observations:**
+- ✅ **Source**: OpenAI Docs MCP (because query contains "OpenAI" keyword)
+- ✅ **Executive Summary**: AI-generated overview of findings
+- ✅ **Key Findings**: 5 facts extracted by LLM from search results
+- ✅ **Details**: Structured breakdown by type (Facts, Statistics, Definitions)
+- ✅ **Sources**: Original search results with URLs and snippets
+
+---
+
+### Response 2: General Topic (Web Search Routing)
+
+**Request:**
+```json
+{
+  "topic": "Can you tell me about Virat Kohli",
+  "maxSources": 2
+}
+```
+
+**Response:**
+```json
+{
+  "topic": "Can you tell me about Virat Kohli",
+  "searchSource": "WEB",
+  "executiveSummary": "Can you tell me about Virat Kohli can be understood through 5 key findings. He scored 692 runs with four centuries in the 2014-15 Test series in Australia, the most by a visiting batter in a four‑Test series there. He recorded his 50th ODI century against New Zealand in the 2023 World Cup semi‑final, overtaking Sachin Tendulkar's record of 49.",
+  "keyFindings": [
+    "He scored 692 runs with four centuries in the 2014-15 Test series in Australia, the most by a visiting batter in a four‑Test series there.",
+    "He recorded his 50th ODI century against New Zealand in the 2023 World Cup semi‑final, overtaking Sachin Tendulkar's record of 49.",
+    "In ODIs, Kohli has amassed 14,941 runs at an average of 58.59, including 54 centuries and 79 fifties.",
+    "Virat Kohli made his One-Day International debut against Sri Lanka in August 2008.",
+    "Kohli won the 2011 ODI World Cup and the 2024 T20 World Cup, retiring from T20 internationals immediately after the latter."
+  ],
+  "details": "## Key Findings\n\n- Virat Kohli made his One-Day International debut against Sri Lanka in August 2008.\n- Kohli won the 2011 ODI World Cup and the 2024 T20 World Cup, retiring from T20 internationals immediately after the latter.\n\n## Statistics\n\n- He scored 692 runs with four centuries in the 2014-15 Test series in Australia, the most by a visiting batter in a four‑Test series there.\n- He recorded his 50th ODI century against New Zealand in the 2023 World Cup semi‑final, overtaking Sachin Tendulkar's record of 49.\n- In ODIs, Kohli has amassed 14,941 runs at an average of 58.59, including 54 centuries and 79 fifties.\n\n## Definitions\n\nNo definitions found.\n",
+  "sources": [
+    {
+      "title": "Virat Kohli - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Virat_Kohli",
+      "snippet": "Virat Kohli is best batsman in world, will always remember him, says Tim Paine. The Hindu. Melbourne. 16 May 2021. Chandra, Kathakali (12 September 2022). Virat Kohli is one of the best cricketers on earth. He's great for cricket: Brett Lee. Forbes India."
+    },
+    {
+      "title": "Virat Kohli | cricket.com.au",
+      "url": "https://www.cricket.com.au/players/CA:10917/virat-kohli",
+      "snippet": "Undoubtedly one of India's finest ever batters, Virat Kohli has been a superstar of international cricket for well over a decade. His senior international career took off soon after when Kohli made his one-day international debut against Sri Lanka in August 2008."
+    }
+  ]
+}
+```
+
+**Key Observations:**
+- ✅ **Source**: WEB (Tavily/DuckDuckGo, because query has no OpenAI keywords)
+- ✅ **Executive Summary**: AI-generated overview highlighting key statistics
+- ✅ **Key Findings**: Mix of facts, statistics, and definitions extracted by LLM
+- ✅ **Details**: Structured with Facts, Statistics, and Definitions sections
+- ✅ **Sources**: Real web search results from Wikipedia and cricket.com.au
+
+---
+
+### Response Comparison
+
+| Aspect | OpenAI (MCP) | General (Web) |
+|--------|------|-------|
+| Routing | Keyword detected "OpenAI" | No OpenAI keywords |
+| Source | OpenAI Docs MCP | Web Search (Tavily) |
+| Search Quality | High precision, official docs | Broad coverage, multiple sources |
+| Extraction | LLM extracts from MCP results | LLM extracts from web results |
+| Insight Types | Facts, Statistics, Definitions | Facts, Statistics, Definitions |
+| Confidence | 0.80-0.90 (official sources) | 0.70-0.85 (web sources) |
 
 ## Design Decisions
 
