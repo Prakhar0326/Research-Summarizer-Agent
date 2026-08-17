@@ -259,15 +259,6 @@ public class MCPService {
     return message.path("result");
   }
 
-  /**
-   * Calculate relevance score for a search result based on query match
-   * Improved algorithm:
-   * - Title match containing query keywords: 0.95
-   * - URL match containing query keywords: 0.85
-   * - Snippet match containing query keywords: 0.75
-   * - Bonus for having multiple relevant keywords
-   * - Penalty for results without relevant keywords
-   */
   private double calculateRelevanceScore(String query, String title, String url, String snippet) {
     String lowerQuery = query.toLowerCase();
     String lowerTitle = title.toLowerCase();

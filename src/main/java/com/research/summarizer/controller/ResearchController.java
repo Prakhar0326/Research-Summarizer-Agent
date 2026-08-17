@@ -15,11 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * REST API Controller for research summarization
- * 
- * Exposes the POST /api/research/summarize endpoint
- */
 @Slf4j
 @RestController
 @RequestMapping("/api/research")
@@ -28,13 +23,6 @@ public class ResearchController {
 
   private final ResearchSummarizerService researchService;
 
-  /**
-   * POST endpoint to trigger the research summarization pipeline
-   * 
-   * Request: { "topic": "string", "maxSources": 5 }
-   * Response: { "topic", "searchSource", "executiveSummary", "keyFindings",
-   * "details", "sources" }
-   */
   @PostMapping("/summarize")
   public ResponseEntity<?> summarizeResearch(@RequestBody ResearchRequest request) {
     log.info("Received research request for topic: {}", request.topic());
